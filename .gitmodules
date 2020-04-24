@@ -1,0 +1,12 @@
+[submodule "packages/dashboarder"]
+	path = packages/dashboarder
+	url = git@github.com:williamlagos/django-dashboarder
+[submodule "packages/shipping"]
+	path = packages/shipping
+	url = git@github.com:williamlagos/django-shipping
+[submodule "packages/socialize"]
+	path = packages/socialize
+	url = git@github.com:williamlagos/django-socialize
+[submodule "packages/feedly"]
+	path = packages/feedly
+	url = git@github.com:williamlagos/django-feedly
