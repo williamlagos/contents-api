@@ -31,16 +31,22 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'feedly',
+    'shipping',
+    'socialize',
+    'dashboarder',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'dashboarder',
-    # 'socialize',
-    # 'shipping',
-    # 'feedly'
+    'emporio.invent',
+    'genese.plethora',
+    'lab.spread.efforia',
+    'lab.spread.spread',
+    'plethora.alpha',
+    'sputnik.sputnik',
 ]
 
 MIDDLEWARE = [
@@ -122,3 +128,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# Other settings, to be modified or discarded
+LOCALE_DATE = ("Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez")
