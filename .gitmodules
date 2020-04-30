@@ -25,3 +25,6 @@
 [submodule "lab"]
 	path = lab
 	url = git@github.com:williamlagos/lab
+[submodule "coworking"]
+	path = coworking
+	url = git@github.com:williamlagos/coworking
