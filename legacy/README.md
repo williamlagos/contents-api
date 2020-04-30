@@ -1,4 +1,0 @@
-legacy
-=======
-
-Legacy Social Platform
