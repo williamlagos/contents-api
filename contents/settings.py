@@ -42,10 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'emporio.invent',
-    'genese.plethora',
-    'lab.spread.efforia',
-    'lab.spread.spread',
-    'plethora.alpha',
+    'plethora.plethora',
+    'legacy.efforia',
+    'legacy.spread',
     'sputnik.sputnik',
 ]
 
