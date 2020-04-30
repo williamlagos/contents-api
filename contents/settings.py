@@ -41,11 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'emporio.invent',
     'plethora.plethora',
+    'emporio.emporio',
+    'sputnik.sputnik',
     'legacy.efforia',
     'legacy.spread',
-    'sputnik.sputnik',
 ]
 
 MIDDLEWARE = [
