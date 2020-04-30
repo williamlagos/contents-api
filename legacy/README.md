@@ -1,4 +1,4 @@
-efforia
+legacy
 =======
 
-Efforia Social Platform
+Legacy Social Platform
