@@ -43,9 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'plethora.plethora',
     'emporio.emporio',
-    'sputnik.sputnik',
-    'legacy.efforia',
-    'legacy.spread',
 ]
 
 MIDDLEWARE = [

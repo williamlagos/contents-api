@@ -1,26 +1,26 @@
 [submodule "packages/dashboarder"]
-	path = packages/dashboarder
+	path = dashboarder
 	url = git@github.com:williamlagos/django-dashboarder
 [submodule "packages/shipping"]
-	path = packages/shipping
+	path = shipping
 	url = git@github.com:williamlagos/django-shipping
 [submodule "packages/socialize"]
-	path = packages/socialize
+	path = socialize
 	url = git@github.com:williamlagos/django-socialize
 [submodule "packages/feedly"]
-	path = packages/feedly
+	path = feedly
 	url = git@github.com:williamlagos/django-feedly
 [submodule "sputnik"]
-	path = sputnik
+	path = samples/sputnik
 	url = git@github.com:williamlagos/sputnik
 [submodule "emporio"]
 	path = emporio
 	url = git@github.com:williamlagos/emporio
 [submodule "lab"]
-	path = lab
+	path = samples/lab
 	url = git@github.com:williamlagos/lab
 [submodule "coworking"]
-	path = coworking
+	path = samples/coworking
 	url = git@github.com:williamlagos/coworking
 [submodule "plethora"]
 	path = plethora
