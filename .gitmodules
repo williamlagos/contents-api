@@ -10,9 +10,6 @@
 [submodule "packages/feedly"]
 	path = packages/feedly
 	url = git@github.com:williamlagos/django-feedly
-[submodule "genese"]
-	path = genese
-	url = git@github.com:williamlagos/genese
 [submodule "sputnik"]
 	path = sputnik
 	url = git@github.com:williamlagos/sputnik
@@ -25,3 +22,6 @@
 [submodule "coworking"]
 	path = coworking
 	url = git@github.com:williamlagos/coworking
+[submodule "plethora"]
+	path = plethora
+	url = git@github.com:williamlagos/plethora
