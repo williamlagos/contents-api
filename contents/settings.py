@@ -48,8 +48,8 @@ INSTALLED_APPS = [
     'dashboarder.dashboarder',
     'socialize.socialize',   
     'shipping.shipping',
-    # 'plethora.plethora',
-    # 'emporio.emporio',
+    'plethora.plethora',
+    'emporio.emporio',
     'feedly.feedly',
 ]
 
