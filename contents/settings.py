@@ -31,18 +31,26 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'feedly',
-    'shipping',
-    'socialize',
-    'dashboarder',
+    # Production mode, get modules from pip
+    # 'feedly',
+    # 'emporio',
+    # 'plethora',
+    # 'shipping',
+    # 'socialize',
+    # 'dashboarder',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'plethora.plethora',
-    'emporio.emporio',
+    'django.contrib.staticfiles', 
+    # Development mode, inject modules directly
+    'dashboarder.dashboarder',
+    'socialize.socialize',   
+    'shipping.shipping',
+    # 'plethora.plethora',
+    # 'emporio.emporio',
+    'feedly.feedly',
 ]
 
 MIDDLEWARE = [
