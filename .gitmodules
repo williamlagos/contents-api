@@ -27,3 +27,6 @@
 	url = git@github.com:williamlagos/sputnik
 
 
+[submodule "samples/hub"]
+	path = samples/hub
+	url = git@github.com:williamlagos/hub
