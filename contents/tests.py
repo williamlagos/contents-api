@@ -22,6 +22,22 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from django.test import TestCase
+from django.test import TestCase, Client
 
 # Create your tests here.
+
+class RequestTestCase(TestCase):
+    def setUp(self):
+        self.cli = Client()
+    def test_payments_endpoint(self):
+        self.assertEqual(self.cli.get('/marketplace/payments/').status_code, 200)
+    def test_request_call(self):
+        pass
+        # self.assertEqual(self.cli.get('/pay/1').status_code, 404) # payment_redirect view
+        # self.assertEqual(self.cli.get('/execute').status_code, 404) # payment_execute view
+        # self.assertEqual(self.cli.get('/basketclean').status_code, 200) # basketclean view
+        # self.assertEqual(self.cli.get('/basket').status_code, 200) # basket view
+        # self.assertEqual(self.cli.get('/pagseguro/cart').status_code, 200) # pagsegurocart view
+        # self.assertEqual(self.cli.get('/pagseguro').status_code, 200) # pagseguro view
+        # self.assertEqual(self.cli.get('/paypal/cart').status_code, 200) # paypalcart view
+        # self.assertEqual(self.cli.get('/paypal').status_code, 200) # paypal view
