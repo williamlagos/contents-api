@@ -16,6 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+# from django.contrib.auth.models import User
+# from django.views import View
+# from django.http import JsonResponse
+# from django.core import serializers
+
+# class UsersView(View):
+#     def get(self, request):
+#         return JsonResponse(User.objects.all().values()[0])
+
 urlpatterns = [
     path('dashboard/', admin.site.urls),
     path('deliveries/', include('shipping.shipping.urls')),
@@ -23,4 +32,5 @@ urlpatterns = [
     path('contents/', include('plethora.plethora.urls')),
     path('blocks/', include('feedly.feedly.urls')),
     path('links/', include('socialize.socialize.urls')),
+    # path('users/', UsersView.as_view()),
 ]
