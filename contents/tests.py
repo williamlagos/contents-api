@@ -30,7 +30,12 @@ class RequestTestCase(TestCase):
     def setUp(self):
         self.cli = Client()
     def test_payments_endpoint(self):
-        self.assertEqual(self.cli.get('/marketplace/payments/').status_code, 200)
+        self.assertEqual(self.cli.get('/deliveries/').status_code, 200)
+        self.assertEqual(self.cli.get('/products/payments/').status_code, 200)
+        self.assertEqual(self.cli.get('/contents/').status_code, 200)
+        self.assertEqual(self.cli.get('/blocks/mosaic/').status_code, 200)
+        self.assertEqual(self.cli.get('/links/profile/').status_code, 200)
+
     def test_request_call(self):
         pass
         # self.assertEqual(self.cli.get('/pay/1').status_code, 404) # payment_redirect view

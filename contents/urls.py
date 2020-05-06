@@ -17,6 +17,10 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('marketplace/', include('emporio.emporio.urls'))
+    path('dashboard/', admin.site.urls),
+    path('deliveries/', include('shipping.shipping.urls')),
+    path('products/', include('emporio.emporio.urls')),
+    path('contents/', include('plethora.plethora.urls')),
+    path('blocks/', include('feedly.feedly.urls')),
+    path('links/', include('socialize.socialize.urls')),
 ]
