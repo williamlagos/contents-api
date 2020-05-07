@@ -15,6 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from socialize.socialize.urls import profiles_patterns
+from shipping.shipping.urls import deliveries_patterns
+from plethora.plethora.urls import contents_patterns
+from emporio.emporio.urls import products_patterns, baskets_patterns
+from feedly.feedly.urls import blocks_patterns
 
 # from django.contrib.auth.models import User
 # from django.views import View
@@ -27,10 +32,11 @@ from django.urls import include, path
 
 urlpatterns = [
     path('dashboard/', admin.site.urls),
-    path('deliveries/', include('shipping.shipping.urls')),
-    path('products/', include('emporio.emporio.urls')),
-    path('contents/', include('plethora.plethora.urls')),
-    path('blocks/', include('feedly.feedly.urls')),
-    path('links/', include('socialize.socialize.urls')),
+    path('deliveries/', include(deliveries_patterns)),
+    path('profiles/', include(profiles_patterns)),
+    path('contents/', include(contents_patterns)),
+    path('products/', include(products_patterns)),
+    path('baskets/', include(baskets_patterns)),
+    path('blocks/', include(blocks_patterns)),
     # path('users/', UsersView.as_view()),
 ]
