@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from socialize.socialize.urls import profiles_patterns
+from socialize.socialize.urls import accounts_patterns
 from shipping.shipping.urls import deliveries_patterns
 from plethora.plethora.urls import contents_patterns
 from emporio.emporio.urls import products_patterns, baskets_patterns
@@ -33,7 +33,7 @@ from feedly.feedly.urls import blocks_patterns
 urlpatterns = [
     path('dashboard/', admin.site.urls),
     path('deliveries/', include(deliveries_patterns)),
-    path('profiles/', include(profiles_patterns)),
+    path('accounts/', include(accounts_patterns)),
     path('contents/', include(contents_patterns)),
     path('products/', include(products_patterns)),
     path('baskets/', include(baskets_patterns)),

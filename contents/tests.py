@@ -31,7 +31,7 @@ class RequestTestCase(TestCase):
         self.cli = Client()
     def test_payments_endpoint(self):
         self.assertEqual(self.cli.get('/deliveries/').status_code, 200)
-        self.assertEqual(self.cli.get('/profiles/').status_code, 200)
+        self.assertEqual(self.cli.get('/accounts/').status_code, 200)
         self.assertEqual(self.cli.get('/contents/').status_code, 200)
         self.assertEqual(self.cli.get('/products/').status_code, 200)
         self.assertEqual(self.cli.get('/baskets/').status_code, 200)
