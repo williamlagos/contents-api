@@ -20,7 +20,7 @@ from django.urls import include, path
 from socialize.socialize.urls import accounts_patterns
 from shipping.shipping.urls import deliveries_patterns
 from plethora.plethora.urls import contents_patterns
-from emporio.emporio.urls import products_patterns, baskets_patterns, orders_patterns
+from emporio.emporio.urls import urlpatterns as emporio_patterns
 from feedly.feedly.urls import blocks_patterns
 
 class HealthCheckView(View):
@@ -33,8 +33,6 @@ urlpatterns = [
     path('deliveries/', include(deliveries_patterns)),
     path('accounts/', include(accounts_patterns)),
     path('contents/', include(contents_patterns)),
-    path('products/', include(products_patterns)),
-    path('baskets/', include(baskets_patterns)),
-    path('orders/', include(orders_patterns)),
+    path('emporio/', include(emporio_patterns)),
     path('blocks/', include(blocks_patterns)),
 ]
