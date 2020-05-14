@@ -30,12 +30,11 @@ class RequestTestCase(TestCase):
     def setUp(self):
         self.cli = Client()
     def test_payments_endpoint(self):
-        self.assertEqual(self.cli.get('/deliveries/').status_code, 200)
-        self.assertEqual(self.cli.get('/accounts/').status_code, 200)
-        self.assertEqual(self.cli.get('/contents/').status_code, 200)
-        self.assertEqual(self.cli.get('/products/').status_code, 200)
-        self.assertEqual(self.cli.get('/baskets/').status_code, 200)
-        self.assertEqual(self.cli.get('/blocks/').status_code, 200)
+        self.assertEqual(self.cli.get('/socialize/').status_code, 200)
+        self.assertEqual(self.cli.get('/shipping/').status_code, 200)
+        self.assertEqual(self.cli.get('/plethora/').status_code, 200)
+        self.assertEqual(self.cli.get('/emporio/').status_code, 200)
+        self.assertEqual(self.cli.get('/feedly/').status_code, 200)
 
     def test_request_call(self):
         pass

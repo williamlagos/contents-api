@@ -17,11 +17,11 @@ from django.views import View
 from django.contrib import admin
 from django.http import JsonResponse
 from django.urls import include, path
-from socialize.socialize.urls import accounts_patterns
-from shipping.shipping.urls import deliveries_patterns
-from plethora.plethora.urls import contents_patterns
+from socialize.socialize.urls import urlpatterns as socialize_patterns
+from shipping.shipping.urls import urlpatterns as shipping_patterns
+from plethora.plethora.urls import urlpatterns as plethora_patterns
 from emporio.emporio.urls import urlpatterns as emporio_patterns
-from feedly.feedly.urls import blocks_patterns
+from feedly.feedly.urls import urlpatterns as feedly_patterns
 
 class HealthCheckView(View):
     def get(self, request):
@@ -30,9 +30,9 @@ class HealthCheckView(View):
 urlpatterns = [
     path('', HealthCheckView.as_view()),
     path('dashboard/', admin.site.urls),
-    path('deliveries/', include(deliveries_patterns)),
-    path('accounts/', include(accounts_patterns)),
-    path('contents/', include(contents_patterns)),
+    path('socialize/', include(socialize_patterns)),
+    path('shipping/', include(shipping_patterns)),
+    path('plethora/', include(plethora_patterns)),
     path('emporio/', include(emporio_patterns)),
-    path('blocks/', include(blocks_patterns)),
+    path('feedly/', include(feedly_patterns)),
 ]
