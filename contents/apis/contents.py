@@ -17,3 +17,11 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Emporio. If not, see <http://www.gnu.org/licenses/>.
 #
+
+from plethora.plethora.services import ContentService
+
+from .default import DefaultServiceResource
+
+class ContentResource(DefaultServiceResource):
+
+    service = ContentService()

@@ -17,3 +17,11 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Emporio. If not, see <http://www.gnu.org/licenses/>.
 #
+
+from emporio.emporio.services import BasketService
+
+from .default import DefaultServiceResource
+
+class BasketResource(DefaultServiceResource):
+
+    service = BasketService()

@@ -17,3 +17,14 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Emporio. If not, see <http://www.gnu.org/licenses/>.
 #
+
+from shipping.shipping.services import RateService
+
+from .default import DefaultResource
+
+class RateResource(DefaultResource):
+
+    service = RateService()
+
+    def create(self):
+        return self.service.calculate(self.data)

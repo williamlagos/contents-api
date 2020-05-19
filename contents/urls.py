@@ -33,7 +33,14 @@ class HealthCheckView(View):
 urlpatterns = [
     path('', HealthCheckView.as_view()),
     path('v1/', include([
-        path('accounts/', include(AccountResource.urls()))
+        path('accounts/', include(AccountResource.urls())),
+        path('deliveries/', include(DeliveryResource.urls())),
+        path('products/', include(ProductResource.urls())),
+        path('contents/', include(ContentResource.urls())),
+        path('blocks/', include(BlockResource.urls())),
+        path('baskets/', include(BasketResource.urls())),
+        path('orders/', include(OrderResource.urls())),
+        path('rates/', include(RateResource.urls())),
     ]))
     # path('dashboard/', admin.site.urls),
     # path('socialize/', include(socialize_patterns)),

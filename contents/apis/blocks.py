@@ -17,3 +17,11 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Emporio. If not, see <http://www.gnu.org/licenses/>.
 #
+
+from feedly.feedly.services import BlocksService
+
+from .default import DefaultServiceResource
+
+class BlockResource(DefaultServiceResource):
+
+    service = BlocksService()
