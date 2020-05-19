@@ -17,3 +17,12 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Contents. If not, see <http://www.gnu.org/licenses/>.
 #
+
+from .accounts import *
+from .baskets import *
+from .blocks import *
+from .contents import *
+from .deliveries import *
+from .orders import *
+from .products import *
+from .rates import *
