@@ -26,7 +26,6 @@ from restless.exceptions import NotFound, BadRequest
 from restless.preparers import FieldsPreparer, SubPreparer
 
 isnot_fk = lambda field: not isinstance(field, (RelatedField, ManyToOneRel))
-# nested = lambda f: {f.name: f.name for f in f.remote_field.model._meta.get_fields() if isnot_fk(f)}
 
 class DefaultServiceResource(DjangoResource):
     
@@ -42,13 +41,16 @@ class DefaultServiceResource(DjangoResource):
                 nested_field_names = field.remote_field.model._meta.get_fields()
                 nested_fields = {f.name: f.name for f in nested_field_names if isnot_fk(f)}
                 self.fields[field.name] = SubPreparer(field.name, FieldsPreparer(nested_fields)) 
+
+        # Alternative implementation, using dict comprehensions
         # model_fields = self.service.model._meta.get_fields()
         # flat_fields = {f.name: f.name for f in model_fields if isnot_fk(f)}
+        # nested = lambda f: {f.name: f.name for f in f.remote_field.model._meta.get_fields() if isnot_fk(f)}
         # nested_fields = {f.name: SubPreparer(f.name, FieldsPreparer(nested(f))) for f in model_fields if not isnot_fk(f)}
         # self.fields = {**nested_fields, **flat_fields}
+        
         self.preparer = FieldsPreparer(self.fields)
 
-    # Add this!
     def is_authenticated(self):
         # Open everything wide!
         # DANGEROUS, DO NOT DO IN PRODUCTION.
