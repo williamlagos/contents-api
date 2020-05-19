@@ -17,11 +17,14 @@ from django.views import View
 from django.contrib import admin
 from django.http import JsonResponse
 from django.urls import include, path
-from socialize.socialize.urls import urlpatterns as socialize_patterns
-from shipping.shipping.urls import urlpatterns as shipping_patterns
-from plethora.plethora.urls import urlpatterns as plethora_patterns
-from emporio.emporio.urls import urlpatterns as emporio_patterns
-from feedly.feedly.urls import urlpatterns as feedly_patterns
+
+# from socialize.socialize.urls import urlpatterns as socialize_patterns
+# from shipping.shipping.urls import urlpatterns as shipping_patterns
+# from plethora.plethora.urls import urlpatterns as plethora_patterns
+# from emporio.emporio.urls import urlpatterns as emporio_patterns
+# from feedly.feedly.urls import urlpatterns as feedly_patterns
+
+from .apis import *
 
 class HealthCheckView(View):
     def get(self, request):
@@ -29,10 +32,13 @@ class HealthCheckView(View):
 
 urlpatterns = [
     path('', HealthCheckView.as_view()),
-    path('dashboard/', admin.site.urls),
-    path('socialize/', include(socialize_patterns)),
-    path('shipping/', include(shipping_patterns)),
-    path('plethora/', include(plethora_patterns)),
-    path('emporio/', include(emporio_patterns)),
-    path('feedly/', include(feedly_patterns)),
+    path('v1/', include([
+        path('accounts/', include(AccountResource.urls()))
+    ]))
+    # path('dashboard/', admin.site.urls),
+    # path('socialize/', include(socialize_patterns)),
+    # path('shipping/', include(shipping_patterns)),
+    # path('plethora/', include(plethora_patterns)),
+    # path('emporio/', include(emporio_patterns)),
+    # path('feedly/', include(feedly_patterns)),
 ]
