@@ -27,6 +27,9 @@ from restless.preparers import FieldsPreparer, SubPreparer
 
 isnot_fk = lambda field: not isinstance(field, (RelatedField, ManyToOneRel))
 
+class DefaultResource(DjangoResource):
+    pass
+
 class DefaultServiceResource(DjangoResource):
     
     service = None
@@ -41,14 +44,13 @@ class DefaultServiceResource(DjangoResource):
                 nested_field_names = field.remote_field.model._meta.get_fields()
                 nested_fields = {f.name: f.name for f in nested_field_names if isnot_fk(f)}
                 self.fields[field.name] = SubPreparer(field.name, FieldsPreparer(nested_fields)) 
-
+                
         # Alternative implementation, using dict comprehensions
         # model_fields = self.service.model._meta.get_fields()
         # flat_fields = {f.name: f.name for f in model_fields if isnot_fk(f)}
         # nested = lambda f: {f.name: f.name for f in f.remote_field.model._meta.get_fields() if isnot_fk(f)}
         # nested_fields = {f.name: SubPreparer(f.name, FieldsPreparer(nested(f))) for f in model_fields if not isnot_fk(f)}
         # self.fields = {**nested_fields, **flat_fields}
-        
         self.preparer = FieldsPreparer(self.fields)
 
     def is_authenticated(self):
@@ -66,23 +68,30 @@ class DefaultServiceResource(DjangoResource):
         #     return True
         # except ApiKey.DoesNotExist:
         #     return False
-
+    
+    # GET /
     def list(self):
-        print(self.preparer)
-        print(self.fields)
-        return self.service.list()
+        return self.service.model.objects.all()
 
+    # GET /<pk>/
     def detail(self, pk):
         try:
-            return self.service.detail(pk)
+            return self.service.model.objects.get(id=pk)
         except ObjectDoesNotExist:
             raise NotFound()
 
+    # POST /
     def create(self):
-        return self.service.create(self.data)
+        return self.service.model.objects.create(self.data)
 
+    # PUT /<pk>/
     def update(self, pk):
-        return self.service.update(pk, self.data)
+        try:
+            model = self.service.model.objects.filter(id=pk).update(self.data)
+        except self.model.DoesNotExist:
+            model = self.service.model.objects.create(self.data)
+        return model
 
+    # DELETE /<pk>/
     def delete(self, pk):
-        self.service.delete(pk)
+        self.service.model.objects.filter(id=pk).delete()
