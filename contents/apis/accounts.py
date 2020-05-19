@@ -17,3 +17,15 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Emporio. If not, see <http://www.gnu.org/licenses/>.
 #
+
+# from restless.dj import DjangoResource
+# from restless.preparers import FieldsPreparer
+from socialize.socialize.services import SocialService
+
+from .default import DefaultServiceResource
+
+class AccountResource(DefaultServiceResource):
+
+    service = SocialService()
+
+
