@@ -38,12 +38,6 @@ INSTALLED_APPS = [
     # 'shipping',
     # 'socialize',
     # 'dashboarder',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles', 
     # Development mode, inject modules directly
     'dashboarder.dashboarder',
     'socialize.socialize',   
@@ -51,6 +45,13 @@ INSTALLED_APPS = [
     'plethora.plethora',
     'emporio.emporio',
     'feedly.feedly',
+    'contents.apps.ContentsAdminConfig',
+    # 'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
 ]
 
 MIDDLEWARE = [
@@ -136,3 +137,6 @@ STATIC_URL = '/static/'
 
 # Other settings, to be modified or discarded
 LOCALE_DATE = ("Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez")
+
+# DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
+# DROPBOX_OAUTH2_TOKEN = ''

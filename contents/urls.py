@@ -25,6 +25,7 @@ from django.urls import include, path
 # from feedly.feedly.urls import urlpatterns as feedly_patterns
 
 from .apis import *
+from .admin import dashboard
 
 class HealthCheckView(View):
     def get(self, request):
@@ -32,6 +33,7 @@ class HealthCheckView(View):
 
 urlpatterns = [
     path('', HealthCheckView.as_view()),
+    path('dashboard/', dashboard.urls),
     path('v1/', include([
         path('accounts/', include(AccountResource.urls())),
         path('deliveries/', include(DeliveryResource.urls())),
@@ -42,7 +44,6 @@ urlpatterns = [
         path('orders/', include(OrderResource.urls())),
         path('rates/', include(RateResource.urls())),
     ]))
-    # path('dashboard/', admin.site.urls),
     # path('socialize/', include(socialize_patterns)),
     # path('shipping/', include(shipping_patterns)),
     # path('plethora/', include(plethora_patterns)),

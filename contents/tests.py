@@ -27,14 +27,18 @@ from django.test import TestCase, Client
 # Create your tests here.
 
 class RequestTestCase(TestCase):
+
     def setUp(self):
         self.cli = Client()
+        
     def test_payments_endpoint(self):
-        self.assertEqual(self.cli.get('/socialize/').status_code, 200)
-        self.assertEqual(self.cli.get('/shipping/').status_code, 200)
-        self.assertEqual(self.cli.get('/plethora/').status_code, 200)
-        self.assertEqual(self.cli.get('/emporio/').status_code, 200)
-        self.assertEqual(self.cli.get('/feedly/').status_code, 200)
+        self.assertEqual(self.cli.get('v1/accounts/').status_code, 200)
+        self.assertEqual(self.cli.get('v1/deliveries/').status_code, 200)
+        self.assertEqual(self.cli.get('v1/contents/').status_code, 200)
+        self.assertEqual(self.cli.get('v1/products/').status_code, 200)
+        self.assertEqual(self.cli.get('v1/baskets/').status_code, 200)
+        self.assertEqual(self.cli.get('v1/orders/').status_code, 200)
+        self.assertEqual(self.cli.get('v1/blocks/').status_code, 200)
 
     def test_request_call(self):
         pass
