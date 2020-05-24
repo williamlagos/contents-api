@@ -12,7 +12,7 @@ django-pure-pagination==0.3.0
 django-crispy-forms==1.9.0
 paypalrestsdk==1.13.1
 pagseguro==0.3.4
-oauth2==1.9.0
+oauth2==1.9.0.post1
 
 # Production mode, install modules from pip local packages
 # ./dashboarder
