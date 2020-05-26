@@ -1,11 +1,14 @@
 # For more information, please refer to https://aka.ms/vscode-docker-python
-FROM python:3.8-slim-buster
+FROM williamlagos/eos:latest
 
 # Keeps Python from generating .pyc files in the container
 ENV PYTHONDONTWRITEBYTECODE 1
 
 # Turns off buffering for easier container logging
 ENV PYTHONUNBUFFERED 1
+
+# Install python enviroment
+RUN pacman --noconfirm -Syu python python-pip
 
 # Install pip requirements
 ADD requirements.txt .
