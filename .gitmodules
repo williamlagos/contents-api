@@ -16,17 +16,3 @@
 [submodule "plethora"]
 	path = plethora
 	url = git@github.com:williamlagos/django-plethora
-[submodule "lab"]
-	path = samples/lab
-	url = git@github.com:williamlagos/lab
-[submodule "coworking"]
-	path = samples/coworking
-	url = git@github.com:williamlagos/coworking
-[submodule "sputnik"]
-	path = samples/sputnik
-	url = git@github.com:williamlagos/sputnik
-
-
-[submodule "samples/hub"]
-	path = samples/hub
-	url = git@github.com:williamlagos/hub
