@@ -23,4 +23,4 @@ ADD . /app
 # During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
 # CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 RUN python manage.py collectstatic --noinput
-CMD gunicorn --bind 0.0.0.0:$PORT contents.wsgi 
+CMD gunicorn --bind 0.0.0.0:$PORT contents.wsgi
