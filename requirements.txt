@@ -6,16 +6,10 @@ pagseguro>=0.3.4
 oauth2>=1.9.0.post1
 
 # Production mode, install modules from pip local packages
-# ./dashboarder
 # ./socialize
 # ./shipping
-# ./plethora
-# ./emporio
 # ./feedly
 # Production mode, install modules from pip remote packages
-# django-dashboarder
 # django-socialize
 # django-shipping
-# django-plethora
-# django-emporio
 # django-feedly
