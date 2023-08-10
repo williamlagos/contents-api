@@ -1,9 +1,9 @@
 [submodule "shipping"]
-	path = shipping
+	path = django/shipping
 	url = git@github.com:williamlagos/django-shipping
 [submodule "socialize"]
-	path = socialize
+	path = django/socialize
 	url = git@github.com:williamlagos/django-socialize
 [submodule "feedly"]
-	path = feedly
+	path = django/feedly
 	url = git@github.com:williamlagos/django-feedly
