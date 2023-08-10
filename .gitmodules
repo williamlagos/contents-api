@@ -1,18 +1,9 @@
-[submodule "packages/dashboarder"]
-	path = dashboarder
-	url = git@github.com:williamlagos/django-dashboarder
-[submodule "packages/shipping"]
+[submodule "shipping"]
 	path = shipping
 	url = git@github.com:williamlagos/django-shipping
-[submodule "packages/socialize"]
+[submodule "socialize"]
 	path = socialize
 	url = git@github.com:williamlagos/django-socialize
-[submodule "packages/feedly"]
+[submodule "feedly"]
 	path = feedly
 	url = git@github.com:williamlagos/django-feedly
-[submodule "emporio"]
-	path = emporio
-	url = git@github.com:williamlagos/django-emporio
-[submodule "plethora"]
-	path = plethora
-	url = git@github.com:williamlagos/django-plethora
