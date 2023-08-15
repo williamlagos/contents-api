@@ -1,5 +1,6 @@
 from odmantic import AIOEngine, Model, ObjectId
 from fastapi import FastAPI, HTTPException
+from fastapi.testclient import TestClient
 from typing import List
 
 class Content(Model):
@@ -12,7 +13,7 @@ engine = AIOEngine()
 
 @app.get("/")
 async def root():
-    return { "health": "OK" }
+    return {"health": "OK"}
 
 @app.put("/contents/", response_model=Content)
 async def create_content(content: Content):
@@ -38,3 +39,10 @@ async def get_content_by_id(id: ObjectId):
     if content is None:
         raise HTTPException(404)
     return content
+
+client = TestClient(app)
+
+def test_read_main():
+    response = client.get("/")
+    assert response.status_code == 200
+    assert response.json() == {"health": "OK"}
