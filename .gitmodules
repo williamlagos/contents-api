@@ -1,0 +1,4 @@
+[submodule "contents/dashboarder"]
+	path = contents/dashboarder
+	url = git@github.com:williamlagos/django-dashboarder.git
+	branch = master
