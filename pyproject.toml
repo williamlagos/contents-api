@@ -1,0 +1,37 @@
+[project]
+name = "contents-api"
+version = "0.1.0"
+description = "Headless Content Platform"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.11"
+dependencies = [
+    "Django>=5.1.6",
+    "psycopg2-binary>=2.9.7",
+    "gunicorn>=20.1.0",
+    "django-dashboarder",
+    "django-sputnik",
+    "django-ship",
+    "django-feedly",
+]
+
+[tool.uv.sources]
+django-dashboarder = { path = "packages/django-dashboarder", editable = true }
+django-sputnik = { path = "packages/django-sputnik", editable = true }
+django-ship = { path = "packages/django-ship", editable = true }
+django-feedly = { path = "packages/django-feedly", editable = true }
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I"]
+ignore = []
+
+[tool.ruff.lint.isort]
+known-first-party = ["contents"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

@@ -1,4 +1,19 @@
-[submodule "contents/dashboarder"]
-	path = contents/dashboarder
-	url = git@github.com:williamlagos/django-dashboarder.git
+[submodule "packages/django-dashboarder"]
+	path = packages/django-dashboarder
+	url = https://github.com/williamlagos/django-dashboarder.git
+	branch = master
+
+[submodule "packages/django-sputnik"]
+	path = packages/django-sputnik
+	url = https://github.com/williamlagos/django-sputnik.git
+	branch = master
+
+[submodule "packages/django-ship"]
+	path = packages/django-ship
+	url = https://github.com/williamlagos/django-ship.git
+	branch = master
+
+[submodule "packages/django-feedly"]
+	path = packages/django-feedly
+	url = https://github.com/williamlagos/django-feedly.git
 	branch = master
