@@ -1,0 +1,72 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "contents-api"
+version = "1.0.0"
+description = "Modernized Django Ninja backend for Contents Headless CMS with multi-rail commerce, social federation, and Plethora engine."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "William Oliveira de Lagos", email = "william.lagos@icloud.com" }]
+requires-python = ">=3.11"
+classifiers = [
+    "Environment :: Web Environment",
+    "Framework :: Django",
+    "Framework :: Django :: 5.0",
+    "Framework :: Django :: 5.1",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+dependencies = [
+    "django>=5.1.0",
+    "django-ninja>=1.3.0",
+    "django-cors-headers>=4.3.0",
+    "psycopg2-binary>=2.9.9",
+    "gunicorn>=20.1.0",
+    "pydantic>=2.0.0",
+    "pillow>=9.0.0",
+    "django-ship @ git+https://github.com/williamlagos/django-ship.git@master",
+    "django-socialize @ git+https://github.com/williamlagos/django-socialize.git@master",
+    "django-feedly @ git+https://github.com/williamlagos/django-feedly.git@master",
+    "django-dashboarder @ git+https://github.com/williamlagos/django-dashboarder.git@master",
+    "django-plethora @ git+https://github.com/williamlagos/django-plethora.git@master",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.1.0",
+    "pytest>=7.0",
+    "pytest-django>=4.5",
+]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "contents.settings"
+pythonpath = ["."]
+testpaths = ["contents"]
+python_files = ["tests.py", "test_*.py"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+exclude = [
+    "contents/dashboarder/",
+    "env/",
+    "*/migrations/",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = [
+    "E501",  # line too long
+    "F401",  # unused imports
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"

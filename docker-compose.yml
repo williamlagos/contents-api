@@ -1,0 +1,33 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: contents_db
+      POSTGRES_USER: contents_user
+      POSTGRES_PASSWORD: contents_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      DEBUG: "True"
+      SECRET_KEY: "contents-local-docker-dev-secret-key"
+      DATABASE_URL: "postgresql://contents_user:contents_password@db:5432/contents_db"
+      ALLOWED_HOSTS: "*"
+      CORS_ALLOW_ALL: "True"
+      PORT: "8000"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    command: python manage.py runserver 0.0.0.0:8000
+
+volumes:
+  postgres_data:
