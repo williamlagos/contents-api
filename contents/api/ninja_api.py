@@ -4,6 +4,7 @@ from .routers import (
     cms_router,
     contents_router,
     feeds_router,
+    media_router,
     shop_router,
     social_router,
 )
@@ -11,10 +12,10 @@ from .schemas import HealthOut
 
 api = NinjaAPI(
     title="Contents API",
-    version="1.0.0",
+    version="1.1.0",
     description=(
-        "Unified Headless CMS, Plethora publishing, ActivityPub social federation, "
-        "and multi-rail e-commerce engine."
+        "Unified Headless CMS, Plethora digital publishing, media pipeline, "
+        "ActivityPub social federation, and multi-rail e-commerce engine."
     ),
     docs_url="/docs",
 )
@@ -27,13 +28,14 @@ def api_health(request):
         "health": "OK",
         "status": "operational",
         "service": "contents-api",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "framework": "django-ninja",
     }
 
 
 # Mount all modular routers
 api.add_router("/contents", contents_router)
+api.add_router("/media", media_router)
 api.add_router("/cms", cms_router)
 api.add_router("/social", social_router)
 api.add_router("/shop", shop_router)

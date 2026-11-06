@@ -1,9 +1,11 @@
+import io
 import json
 
 from django.contrib.auth.models import User
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import Client, TestCase
 
-from contents.api.models import Content
+from contents.api.models import Content, ContentStatus, MediaAsset
 
 
 class ContentsAPITestCase(TestCase):
@@ -21,7 +23,10 @@ class ContentsAPITestCase(TestCase):
         self.sample_content = Content.objects.create(
             title="Introduction to Headless CMS",
             content="A complete modern architecture with Django Ninja and React.",
+            summary="Overview of headless CMS architecture",
             author="Test Editor",
+            category="Engineering",
+            status=ContentStatus.PUBLISHED,
         )
 
     def test_root_health_check(self):
@@ -54,6 +59,7 @@ class ContentsAPITestCase(TestCase):
         items = res.json()
         self.assertGreaterEqual(len(items), 1)
         self.assertEqual(items[0]["title"], self.sample_content.title)
+        self.assertEqual(items[0]["slug"], self.sample_content.slug)
 
         # 2. Count contents
         res = self.client.get("/api/contents/count")
@@ -64,7 +70,11 @@ class ContentsAPITestCase(TestCase):
         new_payload = {
             "title": "Decentralized Publishing",
             "content": "Exploring ActivityPub and federated social networks.",
+            "summary": "Deep dive into ActivityPub protocol",
             "author": "Alice",
+            "category": "Social",
+            "status": "published",
+            "tags": ["activitypub", "federation"],
         }
         res = self.client.post(
             "/api/contents/",
@@ -74,6 +84,8 @@ class ContentsAPITestCase(TestCase):
         self.assertEqual(res.status_code, 201)
         created = res.json()
         self.assertEqual(created["title"], new_payload["title"])
+        self.assertEqual(created["slug"], "decentralized-publishing")
+        self.assertEqual(created["category"], "Social")
         created_id = created["id"]
 
         # Verify count incremented
@@ -85,8 +97,16 @@ class ContentsAPITestCase(TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(res.json()["author"], "Alice")
 
-        # 5. Patch content
-        patch_payload = {"title": "Updated Decentralized Publishing"}
+        # 5. Get content by slug
+        res = self.client.get("/api/contents/slug/decentralized-publishing")
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.json()["title"], "Decentralized Publishing")
+
+        # 6. Patch content
+        patch_payload = {
+            "title": "Updated Decentralized Publishing",
+            "category": "Decentralization",
+        }
         res = self.client.patch(
             f"/api/contents/{created_id}",
             data=json.dumps(patch_payload),
@@ -94,8 +114,9 @@ class ContentsAPITestCase(TestCase):
         )
         self.assertEqual(res.status_code, 200)
         self.assertEqual(res.json()["title"], "Updated Decentralized Publishing")
+        self.assertEqual(res.json()["category"], "Decentralization")
 
-        # 6. Delete content
+        # 7. Delete content
         res = self.client.delete(f"/api/contents/{created_id}")
         self.assertEqual(res.status_code, 200)
         self.assertEqual(res.json()["message"], "Content deleted successfully")
@@ -103,6 +124,87 @@ class ContentsAPITestCase(TestCase):
         # Verify 404 after deletion
         res = self.client.get(f"/api/contents/{created_id}")
         self.assertEqual(res.status_code, 404)
+
+    def test_content_filtering(self):
+        """Verify content filtering by category, status, and search."""
+        Content.objects.create(
+            title="Draft Secrets",
+            content="Top secret unpublished content",
+            author="Bob",
+            status="draft",
+            category="Internal",
+        )
+
+        # Filter by status
+        res = self.client.get("/api/contents/?status=draft")
+        self.assertEqual(res.status_code, 200)
+        items = res.json()
+        self.assertEqual(len(items), 1)
+        self.assertEqual(items[0]["title"], "Draft Secrets")
+
+        # Filter by category
+        res = self.client.get("/api/contents/?category=Engineering")
+        self.assertEqual(res.status_code, 200)
+        items = res.json()
+        self.assertEqual(len(items), 1)
+        self.assertEqual(items[0]["title"], self.sample_content.title)
+
+        # Search filter
+        res = self.client.get("/api/contents/?search=secret")
+        self.assertEqual(res.status_code, 200)
+        items = res.json()
+        self.assertEqual(len(items), 1)
+        self.assertEqual(items[0]["title"], "Draft Secrets")
+
+    def test_media_assets_pipeline(self):
+        """Verify media upload, listing, registration, and deletion."""
+        # 1. Register remote media URL
+        payload = {
+            "title": "Cloud Banner",
+            "file_url": "https://storage.googleapis.com/contents-bucket/banner.webp",
+            "file_name": "banner.webp",
+            "mime_type": "image/webp",
+            "file_size": 10240,
+            "alt_text": "Modern cloud banner",
+        }
+        res = self.client.post(
+            "/api/media/",
+            data=json.dumps(payload),
+            content_type="application/json",
+        )
+        self.assertEqual(res.status_code, 201)
+        media_id = res.json()["id"]
+
+        # 2. Get media by id
+        res = self.client.get(f"/api/media/{media_id}")
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.json()["title"], "Cloud Banner")
+
+        # 3. List media
+        res = self.client.get("/api/media/")
+        self.assertEqual(res.status_code, 200)
+        self.assertGreaterEqual(len(res.json()), 1)
+
+        # 4. Upload multipart file
+        dummy_file = SimpleUploadedFile(
+            "test_image.png",
+            b"fake-png-image-binary-data",
+            content_type="image/png",
+        )
+        res = self.client.post(
+            "/api/media/upload",
+            data={"file": dummy_file, "alt_text": "Test image upload"},
+        )
+        self.assertEqual(res.status_code, 201)
+        uploaded = res.json()
+        self.assertEqual(uploaded["file_name"], "test_image.png")
+        self.assertEqual(uploaded["mime_type"], "image/png")
+        uploaded_id = uploaded["id"]
+
+        # 5. Delete media
+        res = self.client.delete(f"/api/media/{uploaded_id}")
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.json()["message"], "Media asset deleted successfully")
 
     def test_plethora_cms_router(self):
         """Verify Plethora spreadable and playable endpoints."""

@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Optional
+from typing import List, Optional
 
 from ninja import Schema
 
@@ -8,7 +8,7 @@ class HealthOut(Schema):
     health: str
     status: str = "operational"
     service: str = "contents-api"
-    version: str = "1.0.0"
+    version: str = "1.1.0"
     framework: str = "django-ninja"
 
 
@@ -16,21 +16,47 @@ class ContentIn(Schema):
     title: str
     content: str
     author: str
+    slug: Optional[str] = None
+    summary: Optional[str] = ""
+    category: Optional[str] = "General"
+    status: Optional[str] = "published"
+    cover_image: Optional[str] = ""
+    tags: Optional[List[str]] = []
 
 
 class ContentPatch(Schema):
     title: Optional[str] = None
+    slug: Optional[str] = None
     content: Optional[str] = None
+    summary: Optional[str] = None
     author: Optional[str] = None
+    category: Optional[str] = None
+    status: Optional[str] = None
+    cover_image: Optional[str] = None
+    tags: Optional[List[str]] = None
 
 
 class ContentOut(Schema):
     id: int
     title: str
+    slug: str
     content: str
+    summary: str = ""
     author: str
+    category: str = "General"
+    status: str = "published"
+    cover_image: str = ""
+    tags: List[str] = []
     created_at: datetime
     updated_at: Optional[datetime] = None
+    published_at: Optional[datetime] = None
+
+
+class ContentListOut(Schema):
+    items: List[ContentOut]
+    total: int
+    limit: int
+    offset: int
 
 
 class CountOut(Schema):
@@ -39,6 +65,27 @@ class CountOut(Schema):
 
 class MessageOut(Schema):
     message: str
+
+
+# Media Assets Schemas
+class MediaAssetOut(Schema):
+    id: str
+    title: str
+    file_url: str
+    file_name: str
+    mime_type: str
+    file_size: int
+    alt_text: str
+    created_at: datetime
+
+
+class MediaAssetIn(Schema):
+    title: Optional[str] = ""
+    file_url: Optional[str] = ""
+    file_name: str
+    mime_type: Optional[str] = "application/octet-stream"
+    file_size: Optional[int] = 0
+    alt_text: Optional[str] = ""
 
 
 # Plethora CMS Schemas
